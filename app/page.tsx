@@ -101,41 +101,46 @@ export default function HomePage() {
             </div>
 
             {/* 彩色板块按钮区（像你图里那种彩色条目） */}
-            <section className="mt-10 grid gap-4">
-              {sections.map((s, idx) => {
-                const cls = colorClass(s.color);
-                return (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    className={[
-                      "group rounded-2xl border bg-neutral-950/35 backdrop-blur-md",
-                      "px-6 py-5 transition",
-                      cls.border,
-                      cls.hover,
-                    ].join(" ")}
-                  >
-                    <div className="flex items-start gap-4">
-                      {/* 左边小圆点 */}
-                      <div className="pt-2">
-                        <div className={`h-3 w-3 rounded-full ${cls.dot}`} />
-                      </div>
+            <section className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4">
+  {sections.map((s) => {
+    const cls = colorClass(s.color);
+    return (
+      <Link
+        key={s.href}
+        href={s.href}
+        className={[
+          "group rounded-2xl border bg-black/20 backdrop-blur-md",
+          "px-4 py-4 sm:px-6 sm:py-5 transition",
+          cls.border,
+          cls.hover,
+        ].join(" ")}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div className="pt-1.5">
+              <div className={`h-2.5 w-2.5 rounded-full ${cls.dot}`} />
+            </div>
 
-                      <div className="flex-1">
-                        <div className={`text-xl sm:text-2xl font-extrabold ${cls.text}`}>
-                          {idx + 1}. {s.title}
-                        </div>
-                        <div className="mt-2 text-neutral-200/80">{s.desc}</div>
-                      </div>
+            <div>
+              <div className={`text-base sm:text-lg font-extrabold ${cls.text}`}>
+                {s.title}
+              </div>
 
-                      <div className="text-neutral-300/70 group-hover:text-white transition">
-                        →
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </section>
+              {/* ✅ 手机端隐藏描述，桌面端显示（配色不变） */}
+              <div className="mt-1 hidden md:block text-sm text-neutral-200/80">
+                {s.desc}
+              </div>
+            </div>
+          </div>
+
+          <div className="text-neutral-300/70 group-hover:text-white transition">
+            →
+          </div>
+        </div>
+      </Link>
+    );
+  })}
+</section>
 
             {/* 底部小字 */}
             <div className="mt-10 text-xs text-neutral-300/60">
